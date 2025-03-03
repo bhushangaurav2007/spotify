@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .g1 {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            height: 65px;
+            background-color: black;
+            color: white;
+        }
+
+        .g1 li {
+            padding: 0 12px;
+        }
+
+        .brand img {
+            width: 44px;
+            padding: 0 8px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            font-weight: bolder;
+            font-size: 1.3rem;
+        }
+
+        .page {
+            min-height: 72vh;
+            background-color: black;
+            color: white;
+            display: flex;
+            margin: 23px auto;
+            width: 70%;
+            border-radius: 12px;
+            padding: 34px;
+            background-image: url('/spotifiy/bg2.jpg');
+            background-size: cover;
+        }
+
+        .hero {
+            margin-top: 74px;
+        }
+
+        .s1 {
+            height: 50px;
+            display: flex;
+            background-color: white;
+            width: 90%;
+            color: black;
+            margin: 12px 0;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px;
+            padding: 3px;
+        }
+
+        .bottom {
+            position: sticky;
+            height: 130px;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icons {
+            margin-top: 14px;
+        }
+
+        .icons i {
+            cursor: pointer;
+        }
+
+        #myProgressBar {
+            width: 80vw;
+            cursor: pointer;
+        }
+
+        .songInfo {
+            position: absolute;
+            left: 10vw;
+        }
+
+        .songInfo img {
+            opacity: 0;
+            transition: opacity ease-in;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul class="g1" style="list-style-type: none;">
+            <li class="brand"><img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-eHyIHkbiQ428WtDUb7s6dFnDK3CQ7YQog&s"
+                    alt="spotify">spotify</li>
+            <li>home</li>
+            <li>about</li>
+        </ul>
+    </nav>
+    <div class="page">
+        <div class="main">
+            <h1>Best of NCS - No copyright Sounds</h1>
+            <div class="hero">
+                <div class="s1">
+                    <audio src="/song/1.mp3" controls class="hira"></audio>
+                </div>
+                <div class="s1">
+                    <audio src="/song/song2.mp3" controls class="hira"></audio>
+                </div>
+                <div class="s1">
+                    <audio src="/song/song3.mp3" controls></audio>
+                </div>
+                <div class="s1">
+                    <audio src="/song/song4.mp3" controls></audio>
+                </div>
+                <div class="s1">
+                    <audio src="/song/song5.mp3" controls></audio>
+                </div>
+                <div class="s1">
+                    <audio src="/song/song6.mp3" controls></audio>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <input type="range" name="range" id="myProgressBar" min="0" max="100">
+        <div class="icons">
+            <i class="fa-solid fa-3x fa-backward-step"></i>
+            <i class="fa-regular fa-3x fa-circle-play" id="masterPlay"></i>
+            <i class="fa-solid fa-3x fa-forward-step"></i>
+        </div>
+        <div class="songInfo">
+            <img src="https://i.gifer.com/5uwq.gif" width="42px" alt="">
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/897ebbdc89.js" crossorigin="anonymous"></script>
+    <script>
+        let audios = document.querySelectorAll('audio');
+        let playButton = document.getElementById('masterPlay');
+
+        // Play the clicked audio and pause others
+        audios.forEach(audio => {
+            audio.addEventListener('play', function () {
+                audios.forEach(otherAudio => {
+                    if (otherAudio !== audio) {
+                        otherAudio.pause(); // Pause all other audios except the one that's currently playing
+                    }
+                });
+            });
+        });
+
+        // Master play button
+        playButton.addEventListener('click', function () {
+            // Check if any audio is playing or paused, and play/pause accordingly
+            let playingAudio = Array.from(audios).find(audio => !audio.paused);
+            if (playingAudio) {
+                playingAudio.pause();  // If a song is playing, pause it
+            } else {
+                audios[0].play();  // Start playing the first song if no song is playing
+            }
+        });
+    </script>
+</body>
+
+</html>
