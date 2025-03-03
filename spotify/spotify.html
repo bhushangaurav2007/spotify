@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Spotify Clone</title>
     <style>
         body {
-            background-color: antiquewhite;
-        }
-
-        * {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -21,164 +20,227 @@
             list-style-type: none;
             height: 65px;
             background-color: black;
-            color: white;
+            padding: 0 20px;
         }
 
         .g1 li {
             padding: 0 12px;
+            cursor: pointer;
         }
 
         .brand img {
             width: 44px;
-            padding: 0 8px;
+            padding-right: 10px;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            font-weight: bolder;
+            font-weight: bold;
             font-size: 1.3rem;
         }
 
         .page {
-            min-height: 72vh;
-            background-color: black;
-            color: white;
+            min-height: 75vh;
             display: flex;
-            margin: 23px auto;
+            margin: 20px auto;
             width: 70%;
             border-radius: 12px;
-            padding: 34px;
-            background-image: url('/spotifiy/bg2.jpg');
-            background-size: cover;
+            padding: 20px;
+            background: linear-gradient(to right, #2e2e2e, #1c1c1c);
+            background-image: url(/img/bg.jpg);
         }
 
         .hero {
-            margin-top: 74px;
+            width: 100%;
         }
 
         .s1 {
-            height: 50px;
             display: flex;
-            background-color: white;
-            width: 90%;
-            color: black;
-            margin: 12px 0;
-            justify-content: space-between;
             align-items: center;
-            border-radius: 20px;
-            padding: 3px;
+            background-color:transparent;
+            width: 100%;
+            color: white;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .s1:hover {
+            background-color:rgba(0, 0, 0, 0.641);
+            color: red;
+        }
+
+        .s1 span {
+            margin-left: 10px;
+            background-color: transparent;
         }
 
         .bottom {
-            position: sticky;
-            height: 130px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
             background-color: black;
-            color: white;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-        }
-
-        .icons {
-            margin-top: 14px;
+            justify-content: center;
         }
 
         .icons i {
             cursor: pointer;
+            margin: 0 15px;
+            transition: 0.2s;
+        }
+
+        .icons i:hover {
+            color: #1DB954;
+            transform: scale(1.1);
         }
 
         #myProgressBar {
             width: 80vw;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         .songInfo {
-            position: absolute;
-            left: 10vw;
+            font-size: 18px;
+            font-weight: bold;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        .songInfo img {
-            opacity: 0;
-            transition: opacity ease-in;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 
 <body>
     <nav>
-        <ul class="g1" style="list-style-type: none;">
+        <ul class="g1">
             <li class="brand"><img
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-eHyIHkbiQ428WtDUb7s6dFnDK3CQ7YQog&s"
-                    alt="spotify">spotify</li>
-            <li>home</li>
-            <li>about</li>
+                    alt="spotify"> Spotify</li>
+            <li>Home</li>
+            <li>About</li>
         </ul>
     </nav>
     <div class="page">
-        <div class="main">
-            <h1>Best of NCS - No copyright Sounds</h1>
-            <div class="hero">
-                <div class="s1">
-                    <audio src="/song/1.mp3" controls class="hira"></audio>
+        <div class="hero">
+            <h1>Best of NCS - No Copyright Sounds</h1>
+            <div class="songList">
+                <div class="s1" data-index="0">
+                    <span>🎵 Shivaji song</span>
                 </div>
-                <div class="s1">
-                    <audio src="/song/song2.mp3" controls class="hira"></audio>
+                <div class="s1" data-index="1">
+                    <span>🎵 Barsat kae mosam mae </span>
                 </div>
-                <div class="s1">
-                    <audio src="/song/song3.mp3" controls></audio>
+                <div class="s1" data-index="2">
+                    <span>🎵 Peeni chhod di</span>
                 </div>
-                <div class="s1">
-                    <audio src="/song/song4.mp3" controls></audio>
+                <div class="s1" data-index="3">
+                    <span>🎵 Bullet Wali</span>
                 </div>
-                <div class="s1">
-                    <audio src="/song/song5.mp3" controls></audio>
+                <div class="s1" data-index="4">
+                    <span>🎵 Yar ka staya houa</span>
                 </div>
-                <div class="s1">
-                    <audio src="/song/song6.mp3" controls></audio>
+                <div class="s1" data-index="5">
+                    <span>🎵 Araham bah hae parchanda hae </span>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="bottom">
-        <input type="range" name="range" id="myProgressBar" min="0" max="100">
+        <input type="range" id="myProgressBar" min="0" max="100" value="0">
         <div class="icons">
-            <i class="fa-solid fa-3x fa-backward-step"></i>
+            <i class="fa-solid fa-3x fa-backward-step" id="prev"></i>
             <i class="fa-regular fa-3x fa-circle-play" id="masterPlay"></i>
-            <i class="fa-solid fa-3x fa-forward-step"></i>
+            <i class="fa-solid fa-3x fa-forward-step" id="next"></i>
         </div>
-        <div class="songInfo">
-            <img src="https://i.gifer.com/5uwq.gif" width="42px" alt="">
-        </div>
+        <div class="songInfo" id="currentSong">Select a Song</div>
     </div>
 
     <script src="https://kit.fontawesome.com/897ebbdc89.js" crossorigin="anonymous"></script>
     <script>
-        let audios = document.querySelectorAll('audio');
-        let playButton = document.getElementById('masterPlay');
+        let songList = [
+            "/song/1.mp3",
+            "/song/song2.mp3",
+            "/song/song3.mp3",
+            "/song/song4.mp3",
+            "/song/song5.mp3",
+            "/song/song6.mp3"
+        ];
 
-        // Play the clicked audio and pause others
-        audios.forEach(audio => {
-            audio.addEventListener('play', function () {
-                audios.forEach(otherAudio => {
-                    if (otherAudio !== audio) {
-                        otherAudio.pause(); // Pause all other audios except the one that's currently playing
-                    }
-                });
+        let currentAudio = new Audio(songList[0]);
+        let songIndex = 0;
+        let playButton = document.getElementById('masterPlay');
+        let nextButton = document.getElementById('next');
+        let prevButton = document.getElementById('prev');
+        let progressBar = document.getElementById('myProgressBar');
+        let currentSongDisplay = document.getElementById('currentSong');
+        let songElements = document.querySelectorAll('.s1');
+
+        function playSong(index) {
+            if (!currentAudio.paused) {
+                currentAudio.pause();
+            }
+            currentAudio = new Audio(songList[index]);
+            songIndex = index;
+            currentAudio.play();
+            currentSongDisplay.innerText = `Playing: Song ${index + 1}`;
+
+            playButton.classList.remove('fa-circle-play');
+            playButton.classList.add('fa-circle-pause');
+
+            currentAudio.addEventListener('timeupdate', function () {
+                progressBar.value = (currentAudio.currentTime / currentAudio.duration) * 100;
             });
+
+            currentAudio.addEventListener('ended', function () {
+                nextButton.click();
+            });
+        }
+
+        playButton.addEventListener('click', function () {
+            if (currentAudio.paused) {
+                currentAudio.play();
+                playButton.classList.replace('fa-circle-play', 'fa-circle-pause');
+            } else {
+                currentAudio.pause();
+                playButton.classList.replace('fa-circle-pause', 'fa-circle-play');
+            }
         });
 
-        // Master play button
-        playButton.addEventListener('click', function () {
-            // Check if any audio is playing or paused, and play/pause accordingly
-            let playingAudio = Array.from(audios).find(audio => !audio.paused);
-            if (playingAudio) {
-                playingAudio.pause();  // If a song is playing, pause it
-            } else {
-                audios[0].play();  // Start playing the first song if no song is playing
-            }
+        nextButton.addEventListener('click', function () {
+            songIndex = (songIndex + 1) % songList.length;
+            playSong(songIndex);
+        });
+
+        prevButton.addEventListener('click', function () {
+            songIndex = (songIndex - 1 + songList.length) % songList.length;
+            playSong(songIndex);
+        });
+
+        progressBar.addEventListener('input', function () {
+            currentAudio.currentTime = (progressBar.value / 100) * currentAudio.duration;
+        });
+
+        songElements.forEach((song, index) => {
+            song.addEventListener('click', function () {
+                playSong(index);
+            });
         });
     </script>
 </body>
